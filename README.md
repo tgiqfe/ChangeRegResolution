@@ -1,11 +1,14 @@
-# ChangeRegResolution
+﻿# ChangeRegResolution
 
-##構文
-ChangeRegResolution /c
+## 構文
+ChangeRegResolution /c<br>
 ChangeRegResolution /s <ハードウェアID> /x <解像度(横)> /y <解像度(縦)>
+<br>
+<br>
 
-####最初に、
+#### 最初に、
 ---
+管理者として実行して、
 ```
 ChangeRegResolution /c
 ```
@@ -14,10 +17,12 @@ ChangeRegResolution /c
 MONITOR\SHP1412
 ```
 「\」より右側の文字をハードウェアIDとしてメモしておく。
+<br>
+<br>
 
-
-####次に、
+#### 次に、
 ---
+管理者として実行して、
 ```
 ChangeRegResolution /s <前手順で確認したハードウェアID> /x <解像度(横)> /y <解像度(縦)>
 ```
@@ -27,11 +32,14 @@ ChangeRegResolution /s <前手順で確認したハードウェアID> /x <解像
 ```
 ChangeRegResolution /s SHP1412 /x 2560 /y 1440
 ```
+<br>
 
-####それから
+#### それから
 ---
 ログオフ/再ログオン
 or
 再起動
+<br>
+<br>
 
 解像度が変わっていたら成功。

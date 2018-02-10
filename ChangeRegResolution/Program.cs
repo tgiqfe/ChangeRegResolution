@@ -54,12 +54,15 @@ namespace ChangeRegResolution
                             using (RegistryKey regSubKey =
                                 Registry.LocalMachine.OpenSubKey(REG_CONFIGURATION + "\\" + targetKeyName + "\\" + subtargetKeyName, true))
                             {
-                                regSubKey.SetValue(PARAM_PrimSurfSize_cx, ap.ResolutionX, RegistryValueKind.DWord);
-                                regSubKey.SetValue(PARAM_PrimSurfSize_cy, ap.ResolutionY, RegistryValueKind.DWord);
-                                Console.WriteLine(
+                                int checkX = (int)regSubKey.GetValue(PARAM_PrimSurfSize_cx, 0);
+                                int checkY = (int)regSubKey.GetValue(PARAM_PrimSurfSize_cy, 0);
+                                if(checkX > 0 && checkY > 0)
+                                {
+                                    Console.WriteLine(
                                     "[解像度]\r\n" +
                                     "  - Width  : {0}\r\n" +
                                     "  - Height : {1}", ap.ResolutionX, ap.ResolutionY);
+                                }
                             }
                         }
                     }

@@ -14,6 +14,7 @@ namespace ChangeRegResolution
         public int ResolutionX { get; set; }
         public int ResolutionY { get; set; }
         public bool Runnable { get; set; }
+        public string DisplayNum { get; set; }
 
         //  コンストラクタ
         public ArgsParam() { }
@@ -51,6 +52,14 @@ namespace ChangeRegResolution
                     case "--height":
                         this.ResolutionY = int.TryParse(args[++i], out int tempY) ? tempY : 0;
                         break;
+                    case "/n":
+                    case "-n":
+                    case "/number":
+                    case "-number":
+                    case "--number":
+                        this.DisplayNum = args[++i];
+                        break;
+
                 }
             }
             if (StartsWith != null && ResolutionX > 0 && ResolutionY > 0)

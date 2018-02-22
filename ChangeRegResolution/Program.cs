@@ -27,7 +27,7 @@ namespace ChangeRegResolution
                     OfType<ManagementObject>().
                     Where(x => x["PNPClass"] != null && x["PNPClass"].ToString() == "Monitor"))
                 {
-                    foreach(var id in (string[])mo["HardwareID"])
+                    foreach (var id in (string[])mo["HardwareID"])
                     {
                         Console.WriteLine(id);
                     }
@@ -54,14 +54,29 @@ namespace ChangeRegResolution
                             using (RegistryKey regSubKey =
                                 Registry.LocalMachine.OpenSubKey(REG_CONFIGURATION + "\\" + targetKeyName + "\\" + subtargetKeyName, true))
                             {
-                                int checkX = (int)regSubKey.GetValue(PARAM_PrimSurfSize_cx, 0);
-                                int checkY = (int)regSubKey.GetValue(PARAM_PrimSurfSize_cy, 0);
-                                if(checkX > 0 && checkY > 0)
+                                bool isChange = false;
+                                if (ap.DisplayNum == null || ap.DisplayNum == subtargetKeyName)
+                                {
+                                    int checkX = (int)regSubKey.GetValue(PARAM_PrimSurfSize_cx, 0);
+                                    int checkY = (int)regSubKey.GetValue(PARAM_PrimSurfSize_cy, 0);
+                                    if (checkX > 0 && checkY > 0)
+                                    {
+                                        isChange = true;
+                                    }
+                                }
+                                if (isChange)
                                 {
                                     Console.WriteLine(
-                                    "[解像度]\r\n" +
-                                    "  - Width  : {0}\r\n" +
-                                    "  - Height : {1}", ap.ResolutionX, ap.ResolutionY);
+                                        "[解像度変更] ディスプレイ番号 ({0})\r\n" +
+                                        "  - Width  : {1}\r\n" +
+                                        "  - Height : {2}", subtargetKeyName, ap.ResolutionX, ap.ResolutionY);
+                                    regSubKey.SetValue(PARAM_PrimSurfSize_cx, ap.ResolutionX, RegistryValueKind.DWord);
+                                    regSubKey.SetValue(PARAM_PrimSurfSize_cy, ap.ResolutionY, RegistryValueKind.DWord);
+                                }
+                                else
+                                {
+                                    Console.WriteLine(
+                                        "[解像度変更対象外] ディスプレイ番号 ({0})", subtargetKeyName);
                                 }
                             }
                         }

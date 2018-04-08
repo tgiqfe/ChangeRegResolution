@@ -1,5 +1,12 @@
 ﻿# ChangeRegResolution
 
+<br>
+↓次バージョン作成中。<br>
+https://github.com/tgiqfe/RizoChange2<br>
+多分今度はもっと使いやすくなります。<br>
+<br>
+<br>
+
 ## 構文
 ChangeRegResolution /c<br>
 ChangeRegResolution /s <ハードウェアID> /x <解像度(横)> /y <解像度(縦)>
